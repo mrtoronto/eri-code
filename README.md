@@ -1,91 +1,82 @@
 # eri-code
 
-This project uses `uv` for Python environment and dependency management.
+This is a very small Python practice project.
 
-## Use `uv`
+It has:
 
-Please use `uv` instead of `pip`, `venv`, or `poetry` commands when working in this repo.
+- `random_data.csv` - a simple data file
+- `interact_csv.py` - a Python script that reads that file
+
+## What the files do
+
+### `random_data.csv`
+
+This is a CSV file with 4 columns:
+
+- `id`
+- `name`
+- `category`
+- `score`
+
+You can open it in a text editor and read it like a table.
+
+### `interact_csv.py`
+
+This script:
+
+- reads all rows from `random_data.csv`
+- prints how many rows it found
+- prints the average score
+- prints one random row
+- can add one new random row if you use `--add`
 
 ## Install `uv`
 
-Choose one of the following:
+This repo uses `uv` to run Python.
 
-### macOS and Linux
+Install it with:
 
 ```bash
 curl -LsSf https://astral.sh/uv/install.sh | sh
 ```
 
-### Homebrew
-
-```bash
-brew install uv
-```
-
-### Windows
-
-```powershell
-powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
-```
-
-You can confirm the install with:
+Check that it worked:
 
 ```bash
 uv --version
 ```
 
-## Project setup
+## Run the script
 
-### 1. Create a virtual environment
-
-```bash
-uv venv
-```
-
-### 2. Activate the virtual environment
-
-macOS and Linux:
+From this folder, run:
 
 ```bash
-source .venv/bin/activate
+uv run python interact_csv.py
 ```
 
-Windows PowerShell:
+That will show a quick summary of the CSV file.
 
-```powershell
-.venv\Scripts\Activate.ps1
-```
+## Add a new row
 
-### 3. Install dependencies
-
-If this repo includes a `pyproject.toml`, run:
+If you want the script to also add a new random row to the CSV file, run:
 
 ```bash
-uv sync
+uv run python interact_csv.py --add
 ```
 
-If you are installing a package manually, use:
+This does two things:
 
-```bash
-uv pip install <package-name>
+- shows the summary
+- adds one new row to `random_data.csv`
+
+## What to expect
+
+When you run the script, the output will look roughly like this:
+
+```text
+Loaded 8 rows from random_data.csv
+Average score: 38.1
+Random sample: Finley in beta with score 48
 ```
 
-## Common commands
-
-Run a Python file:
-
-```bash
-uv run python your_script.py
-```
-
-Add a dependency to the project:
-
-```bash
-uv add <package-name>
-```
-
-Add a development dependency:
-
-```bash
-uv add --dev <package-name>
-```
+If you use `--add`, you will also see a line showing the row that got added.
